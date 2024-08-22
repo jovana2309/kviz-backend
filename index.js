@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const app = express()
 require ('dotenv').config()
 
@@ -9,10 +10,8 @@ const createError = require('http-errors')
 const PORT = process.env.PORT
 
 const bodyParser = require('body-parser');
-const {registerUser, loginUser} = require('./controlers/authcontroler');
-
-const authentToken = require('./middleware/authentmiddleware.js'); 
 app.use(morgan("common"));
+app.use(cors());
 app.use(bodyParser.json());
 
 
@@ -22,7 +21,7 @@ const AuthRoute = require ('./routes/authentification');
 const checkAdmin = require("./middleware/checkAdmin.js");
 
 
-app.use("/", router);
+app.use("/api", router);
 
 app.use (async (req,res,next) => {
   next(createError.NotFound())

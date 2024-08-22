@@ -22,8 +22,8 @@ const getTop10Results =  async (req, res) => {
         prezime: result.korisnici.prezime,
         rezultat: result.broj_tacnih_odgovora
       }));
-  
-      res.json(formattedResults);
+      
+      res.status(200).json(formattedResults);
     } catch (err) {
       console.error('Error fetching top results:', err);
       res.status(500).send('Internal Server Error');
