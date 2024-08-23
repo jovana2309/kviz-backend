@@ -11,7 +11,7 @@ const checkAdmin = async (req, res, next) => {
   try {
     const decoded = jwt.decode(token.split(" ")[1]);
     const userEmail = decoded.email;
-    const user = await db.Korisnici.findOne({ where: { email: userEmail }, attributes: ["admin"] });
+    const user = await db.Korisnici.findOne({ where: { email: userEmail }, attributes: ["administrator"] });
     if (!user) {
       return res.status(404).send('User not found');
     }

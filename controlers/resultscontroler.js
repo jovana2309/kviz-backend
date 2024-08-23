@@ -4,7 +4,9 @@ const getTop10Results =  async (req, res) => {
     try {
       const topResults = await db.Rezultati.findAll({
         attributes: [
-          'broj_tacnih_odgovora'  
+          'id',
+          'broj_tacnih_odgovora',
+          'datum'  
         ],
         include: [
           {
@@ -18,9 +20,11 @@ const getTop10Results =  async (req, res) => {
       });
   
       const formattedResults = topResults.map(result => ({
+        id:result.id,
         ime: result.korisnici.ime,
         prezime: result.korisnici.prezime,
-        rezultat: result.broj_tacnih_odgovora
+        rezultat: result.broj_tacnih_odgovora,
+        datum:result.datum
       }));
       
       res.status(200).json(formattedResults);

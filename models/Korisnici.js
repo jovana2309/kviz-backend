@@ -26,7 +26,7 @@ prezime: {
     allowNull: false
 },
 
-admin: {
+administrator: {
     type: DataTypes.INTEGER(10),
     allowNull: true
 }
