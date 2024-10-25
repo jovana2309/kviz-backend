@@ -16,7 +16,7 @@ const checkAdmin = async (req, res, next) => {
       return res.status(404).send('User not found');
     }
 
-    if (!user.admin) {
+    if (!user.administrator) {
       return res.status(403).send('Forbidden');
     }
 
