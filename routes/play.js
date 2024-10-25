@@ -1,13 +1,14 @@
 const express = require("express");
 const router = express.Router()
-const db = require("../models/")
 const authenticateToken = require("../middleware/authentmiddleware.js");
+const playControler = require("../controlers/playcontroler.js");
+
+
 
 router.use(authenticateToken);
 
-
-router.get("/", async (req, res,next) => {
-    res.send('play')
-})
+router.get("/", playControler.startGame);
+router.post("/submitAnswer", playControler.submitAnswer);
+router.post("/fifty-fifty", playControler.fiftyFifty);
 
 module.exports = router;
