@@ -17,8 +17,6 @@ app.use(bodyParser.json());
 
 
 
-const AuthRoute = require ('./routes/authentification');
-const checkAdmin = require("./middleware/checkAdmin.js");
 
 
 app.use("/api", router);
@@ -32,13 +30,6 @@ app.get ('/', async(req,res,next) => {
   res.send('Hello from Express.')
 })
 
-/* app.get('/admin', authenticateToken, checkAdmin, (req, res) => {
-  res.send('Welcome Admin');
-});
-
-app.get('/user', authenticateToken, (req, res) => {
-  res.send('Welcome User');
-}); */
 
 
 
