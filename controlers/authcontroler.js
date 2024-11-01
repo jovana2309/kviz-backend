@@ -34,7 +34,7 @@ const loginUser = async (req, res) => {
         const {email, lozinka} = req.body;
 
         const user = await db.Korisnici.findOne({where: {email} });
-        if (!user) {
+        if (!user) { 
             return res.status(400).json({message: 'Invalid email or password.'});
         }
 
@@ -104,18 +104,21 @@ const getAllUsers =  async (req, res) => {
             const { email, password, name, surname, isAdmin } = req.body;
           
             try {
-              
+
+              const hashedPassword = await bcrypt.hash(password, 10);
+
               const user = await db.Korisnici.create({
                email: email,
-                lozinka:password, 
+                lozinka:hashedPassword, 
                 ime:name,
                 prezime:surname,
                 administrator: isAdmin,
               });
           
-              delete user.password;
+              delete user.lozinka;
               
               return res.status(201).json(user);
+
             } catch (error) {
               console.error('Error adding user:', error);
               return res.status(500).json({ message: 'Internal server error' });
